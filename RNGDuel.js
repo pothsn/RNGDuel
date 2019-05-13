@@ -1,19 +1,23 @@
 runRNGDuel();
 function runRNGDuel (){
 	alert("Welcome to RNG Duel!");
-	let playerOne = prompt("Enter name for Player One.");
-	let playerTwo = prompt("Enter name for Player Two.");
-	alert("Roll stats for (playerOne).");
+	let playerOne
+	let playerTwo
+	alert("Roll stats for Player One.");
 	let playerOneAttack = rollAttack(playerOne);
+	console.log("Player One attack: " + playerOneAttack);
 	let playerOneHealth = rollHealth(playerOne);
+	console.log("Player One health: " + playerOneHealth);
 	let playerOneAccuracy = rollAccuracy(playerOne);
-	console.log(playerOneAttack, playerOneHealth, playerOneAccuracy);
+	console.log("Player One accuracy: " + playerOneAccuracy);
 	alert("Roll stats for (playerTwo).");
 	let playerTwoAttack = rollAttack(playerTwo);
+	console.log("Player Two attack: " + playerTwoAttack);
 	let playerTwoHealth = rollHealth(playerTwo);
+	console.log("Player Two health: " + playerTwoHealth);
 	let playerTwoAccuracy = rollAccuracy(playerTwo);
-	console.log(playerTwoAttack, playerTwoHealth, playerTwoAccuracy);
-	alert("Roll for your battlefield.");
+	console.log("Player Two accuracy: " + playerTwoAccuracy);
+
 }
 function roll(min, max){
 	return Math.floor(Math.random() * (max - min) ) + min;
@@ -46,7 +50,7 @@ function battlefield(){
 		totalAccuracy += totalAccuracy - 1;
 		return playerOneAccuracy;
 	}
-	if (roll = 3){
+	if (roll == 3){
 		alert("The field is a harsh desert, attack has been reduced.");
 		totalAttack += totalAttack - 5;
 		return totalAttack;
