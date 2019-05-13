@@ -1,8 +1,8 @@
 runRNGDuel();
 function runRNGDuel (){
 	alert("Welcome to RNG Duel!");
-	let playerOne
-	let playerTwo
+	let playerOne = "Player One";
+	let playerTwo = "Player Two";
 	alert("Roll stats for Player One.");
 	let playerOneAttack = rollAttack(playerOne);
 	console.log("Player One attack: " + playerOneAttack);
@@ -17,6 +17,9 @@ function runRNGDuel (){
 	console.log("Player Two health: " + playerTwoHealth);
 	let playerTwoAccuracy = rollAccuracy(playerTwo);
 	console.log("Player Two accuracy: " + playerTwoAccuracy);
+	alert("Roll for map selection.");
+	let field = battlefield();
+
 
 }
 function roll(min, max){
@@ -41,25 +44,22 @@ function rollAccuracy(player){
 	return totalAccuracy
 }
 function battlefield(){
-	roll(1,4);
-	if (roll = 1){
-		alert("The field is clear, no change to player stats.");
+	let fieldOne = roll(1,4);
+	switch (fieldOne){
+		case 1:
+			console.log("The field is clear, no change to player stats.");
+			return "clear";
+		case 2:
+		console.log("The field is rainy, accuracy has been reduced.");
+			return "rainy";
+		case 3:
+			console.log("The field is a harsh desert, attack has been reduced.");
+			return "desert";		
+		case 4:
+			console.log("The field is a frozen wasteland, health has been reduced.");
+			return "frozen";
 	}
-	if (roll = 2){
-		alert("The field is rainy, accuracy has been reduced.");
-		totalAccuracy += totalAccuracy - 1;
-		return playerOneAccuracy;
-	}
-	if (roll == 3){
-		alert("The field is a harsh desert, attack has been reduced.");
-		totalAttack += totalAttack - 5;
-		return totalAttack;
-	}
-	if (roll = 4){
-		alert("The field is a frozen wasteland, health has been reduced.");
-		totalHealth += totalHealth - 10;
-		return totalHealth
-	}
+
 }
 function battlefieldAdjustment(){
 
