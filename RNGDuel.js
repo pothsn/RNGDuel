@@ -41,10 +41,12 @@ function runRNGDuel (){
 	else {
 		secondAttacker = playerOne;
 	}
+	
 	let attack = selectAttack(firstAttacker);
 	attackTypeAdjust(firstAttacker, attack);
-	console.log(firstAttacker.aP, firstAttacker.hP, firstAttacker.aCC)
+	console.log("Attack will have " + firstAttacker.aP + " attack power and ", firstAttacker.aCC + " accuracy.")
 
+	attackSuccess(firstAttacker);
 
 
 
@@ -142,10 +144,15 @@ function attackTypeAdjust(attacker, attack){
 	}
 		return attacker;
 }
-// function attack(oneAttacker, twoAttacker){
-// 	attackStats = attackTypeAdjust(firstAttacker, selectedAttack);
-// 	console.log(attackStats)
-// }
+function attackSuccess(attacker){
+	let hitRoll = roll(1, 10);
+	if(hitRoll <= attacker.aCC){
+		console.log("The attack hit!")
+	}
+	else{
+		console.log("The attack missed!")
+	}
+}
 
 
 
