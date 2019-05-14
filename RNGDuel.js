@@ -41,23 +41,32 @@ function runRNGDuel (){
 	else {
 		secondAttacker = playerOne;
 	}
+
+
+	// while() {
+		doPlayerAttack(firstAttacker, secondAttacker);
+		doPlayerAttack(secondAttacker, firstAttacker);
+	// }
+
+// 
 	
-	let attack = selectAttack(firstAttacker);
-	attackTypeAdjust(firstAttacker, attack);
-	console.log(firstAttacker.name + " selected " + attack);
-	console.log("Attack will have " + firstAttacker.aP + " attack power and ", firstAttacker.aCC + " accuracy.")
-	
-	let swing = attackSuccess(firstAttacker);
-	let miss; 
-	if(swing = true){
-		damageTaken(firstAttacker, secondAttacker);
-		selectAttack(secondAttacker);
-	}
-	else{
-		selectAttack(secondAttacker);
-	}
+
+
+
 }
 
+function doPlayerAttack(attacker, defender){
+	let attack = selectAttack(attacker);
+	attackTypeAdjust(attacker, attack);
+	console.log(attacker.name + " selected " + attack);
+	console.log("Attack will have " + attacker.aP + " attack power and ", attacker.aCC + " accuracy.")
+	
+	let swing = attackSuccess(attacker);
+	let miss; 
+	if(swing === true){
+		damageTaken(attacker, defender);
+	}
+}
 
 
 function roll(min, max){
@@ -160,11 +169,10 @@ function attackSuccess(attacker){
 		return false;
 	}
 }
-function damageTaken(firstPlayer, secondPlayer){
-	let hitFor = secondPlayer.hP - firstPlayer.aP;
-	console.log(secondPlayer.name + " hit for " + hitFor + " damage.");
-	secondPlayer.hP -= firstPlayer.aP;
-	console.log(secondPlayer.name + " has " + secondPlayer.hP + " health remaining.");
+function damageTaken(attacker, defender){
+	console.log(defender.name + " hit for " + attacker.aP + " damage.");
+	defender.hP -= attacker.aP;
+	console.log(defender.name + " has " + defender.hP + " health remaining.");
 }
 
 
