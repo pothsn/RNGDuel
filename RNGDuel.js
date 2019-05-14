@@ -1,33 +1,52 @@
 runRNGDuel();
 function runRNGDuel (){
 	console.log("Welcome to RNG Duel!");
-	let playerOne = "Player One";
-	let playerTwo = "Player Two";
-	let playerOneAttack = rollAttack(playerOne);
-	let playerOneHealth = rollHealth(playerOne);
-	let playerOneAccuracy = rollAccuracy(playerOne);
-	let playerOneStats = {
-		aP: (playerOneAttack),
-		hP: (playerOneHealth),
-		aCC: (playerOneAccuracy)
+	// let playerOne = "Player One";
+	// let playerTwo = "Player Two";
+	let playerOneAttack = rollAttack();
+	let playerOneHealth = rollHealth();
+	let playerOneAccuracy = rollAccuracy();
+	let playerOne = {
+		aP: playerOneAttack,
+		hP: playerOneHealth,
+		aCC: playerOneAccuracy,
+		playerNumber: 1,
+		name: "Player One"
 	}
-	console.log("Player One attack: " + (playerOneStats.aP), "Player One health: " + (playerOneStats.hP), "Player One accuracy: " + (playerOneStats.aCC));
-	let playerTwoAttack = rollAttack(playerTwo);
-	let playerTwoHealth = rollHealth(playerTwo);
-	let playerTwoAccuracy = rollAccuracy(playerTwo);
-	let playerTwoStats = {
-		aP: (playerTwoAttack),
-		hP: (playerTwoHealth),
-		aCC: (playerTwoAccuracy)
+	console.log("Player One attack: " + (playerOne.aP),"Player One health: " + (playerOne.hP), "Player One accuracy: " + (playerOne.aCC));
+	let playerTwoAttack = rollAttack();
+	let playerTwoHealth = rollHealth();
+	let playerTwoAccuracy = rollAccuracy();
+	let playerTwo = {
+		aP: playerTwoAttack,
+		hP: playerTwoHealth,
+		aCC: playerTwoAccuracy,
+		playerNumber: 2,
+		name: "Player Two"
 	}
-	console.log("Player Two attack: " + (playerTwoStats.aP), "Player Two health: " + (playerTwoStats.hP), "Player Two accuracy: " + (playerTwoStats.aCC));
+	console.log("Player Two attack: " + (playerTwo.aP), "Player Two health: " + (playerTwo.hP), "Player Two accuracy: " + (playerTwo.aCC));
+	
 	let selectedField = battlefield();
-	playerOneStats = battlefieldAdjustment(playerOneStats, selectedField);
-	playerTwoStats = battlefieldAdjustment(playerTwoStats, selectedField);
-	console.log("Player One attack: " + (playerOneStats.aP), "Player One health: " + (playerOneStats.hP), "Player One accuracy: " + (playerOneStats.aCC));
-	console.log("Player Two attack: " + (playerTwoStats.aP), "Player Two health: " + (playerTwoStats.hP), "Player Two accuracy: " + (playerTwoStats.aCC));
-	let firstAttacker = attackRoll(playerOne, playerTwo);
-	console.log(firstAttacker);
+	playerOne = battlefieldAdjustment(playerOne, selectedField);
+	playerTwo = battlefieldAdjustment(playerTwo, selectedField);
+	console.log("Player One attack: " + (playerOne.aP), "Player One health: " + (playerOne.hP), "Player One accuracy: " + (playerOne.aCC));
+	console.log("Player Two attack: " + (playerTwo.aP), "Player Two health: " + (playerTwo.hP), "Player Two accuracy: " + (playerTwo.aCC));
+	
+	let firstAttacker = firstAttackRoll(playerOne, playerTwo);
+	console.log(firstAttacker.name + " will attack first.");
+
+	let secondAttacker;
+
+	if(firstAttacker.playerNumber === 1) {
+		secondAttacker = playerTwo;
+	}
+	else {
+		secondAttacker = playerOne;
+	}
+
+	// firstAttacker = adjustStatsBasedOnAttackType();
+
+
 
 
 }
@@ -37,19 +56,19 @@ function runRNGDuel (){
 function roll(min, max){
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
-function rollAttack(player){
+function rollAttack(){
 	let baseAttack = 10;
 	let attackRoll = roll(1, 8);
 	let totalAttack = baseAttack + attackRoll;
 	return totalAttack;
 }
-function rollHealth(player){
+function rollHealth(){
 	let baseHealth = 25;
 	let healthRoll = roll(1, 20);
 	let totalHealth = baseHealth + healthRoll;
 	return totalHealth;
 }
-function rollAccuracy(player){
+function rollAccuracy(){
 	let baseAccuracy = 3;
 	let accuracyRoll = roll(1, 6);
 	let totalAccuracy = baseAccuracy + accuracyRoll;
@@ -91,7 +110,7 @@ function battlefieldAdjustment(playerStats, fieldSelection){
 		}
 		return playerStats;
 }
-function attackRoll(firstPlayer, secondPlayer){
+function firstAttackRoll(firstPlayer, secondPlayer){
 	let firstPlayerRoll = roll(1, 12);
 	let secondPlayerRoll = roll(1, 12);
 		if(firstPlayerRoll > secondPlayerRoll){
@@ -101,10 +120,10 @@ function attackRoll(firstPlayer, secondPlayer){
 				return secondPlayer;
 			}
 			else{
-				attackRoll(firstPlayer,secondPlayer);
-				return;
+				return firstAttackRoll(firstPlayer,secondPlayer);
 			}
 		}
+
 
 
 
