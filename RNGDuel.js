@@ -3,22 +3,32 @@ function runRNGDuel (){
 	alert("Welcome to RNG Duel!");
 	let playerOne = "Player One";
 	let playerTwo = "Player Two";
-	alert("Roll stats for Player One.");
+	// alert("Roll stats for Player One.");
 	let playerOneAttack = rollAttack(playerOne);
 	console.log("Player One attack: " + playerOneAttack);
 	let playerOneHealth = rollHealth(playerOne);
 	console.log("Player One health: " + playerOneHealth);
 	let playerOneAccuracy = rollAccuracy(playerOne);
 	console.log("Player One accuracy: " + playerOneAccuracy);
-	alert("Roll stats for (playerTwo).");
+	let playerOneStats = {
+		aP: "playerOneAttack",
+		hP: "playerOneHealth",
+		aCC: "playerOneAccuracy"
+	}
+	// alert("Roll stats for Player Two.");
 	let playerTwoAttack = rollAttack(playerTwo);
 	console.log("Player Two attack: " + playerTwoAttack);
 	let playerTwoHealth = rollHealth(playerTwo);
 	console.log("Player Two health: " + playerTwoHealth);
 	let playerTwoAccuracy = rollAccuracy(playerTwo);
 	console.log("Player Two accuracy: " + playerTwoAccuracy);
+	let playerTwoStats = {
+		aP: "playerTwoAttack",
+		hP: "playerTwoHealth",
+		aCC: "playerTwoAccuracy"
+	}
 	alert("Roll for map selection.");
-	let field = battlefield();
+	let selectedField = battlefield();
 
 
 }
@@ -44,8 +54,8 @@ function rollAccuracy(player){
 	return totalAccuracy
 }
 function battlefield(){
-	let fieldOne = roll(1,4);
-	switch (fieldOne){
+	let field = roll(1,4);
+	switch (field){
 		case 1:
 			console.log("The field is clear, no change to player stats.");
 			return "clear";
