@@ -131,7 +131,7 @@ function attackTypeAdjust(attacker, attack){
 	switch (attack){
 		case "Measured":
 			attacker.aCC += 5;
-			attacker.aP -= -12;
+			attacker.aP -= 12;
 			break;
 		case "Heavy": 
 			attacker.aP += 6;
@@ -142,10 +142,10 @@ function attackTypeAdjust(attacker, attack){
 	}
 		return attacker;
 }
-function attack(oneAttacker, twoAttacker){
-	attackStats = attackTypeAdjust(firstAttacker, selectedAttack);
-	console.log(attackStats)
-}
+// function attack(oneAttacker, twoAttacker){
+// 	attackStats = attackTypeAdjust(firstAttacker, selectedAttack);
+// 	console.log(attackStats)
+// }
 
 
 
