@@ -1,6 +1,6 @@
 runRNGDuel();
 function runRNGDuel (){
-	alert("Welcome to RNG Duel!");
+	// alert("Welcome to RNG Duel!");
 	let playerOne = "Player One";
 	let playerTwo = "Player Two";
 	let playerOneAttack = rollAttack(playerOne);
@@ -84,10 +84,12 @@ function battlefieldAdjustment(playerStats, selectedField){
 				break;
 			case "desert":
 				playerStats.aP -= 5;
+				break;
 				//playerStats.aP = playerStats.aP - 5;
 			case "frozen":
 				playerStats.hP -= 10;
-				//playerStats.aP = playerStats.aP - 10;
+				//playerStats.aP = playerStats.hP - 10;
+				break;
 		}
 		return playerStats;
 
