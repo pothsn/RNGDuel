@@ -1,8 +1,6 @@
 runRNGDuel();
 function runRNGDuel (){
 	console.log("Welcome to RNG Duel!");
-	// let playerOne = "Player One";
-	// let playerTwo = "Player Two";
 	let playerOneAttack = rollAttack();
 	let playerOneHealth = rollHealth();
 	let playerOneAccuracy = rollAccuracy();
@@ -43,8 +41,10 @@ function runRNGDuel (){
 	else {
 		secondAttacker = playerOne;
 	}
+	let attack = selectAttack(firstAttacker);
+	attackTypeAdjust(firstAttacker, attack);
+	console.log(firstAttacker.aP, firstAttacker.hP, firstAttacker.aCC)
 
-	// firstAttacker = adjustStatsBasedOnAttackType();
 
 
 
@@ -92,23 +92,23 @@ function battlefield(){
 	}
 }
 function battlefieldAdjustment(playerStats, fieldSelection){
-		switch (fieldSelection){
-			case "clear":
-				break;
-			case "rainy":
-				playerStats.aCC -= 1;
-				// playerStats.aCC = playerStats.aCC - 10;
-				break;
-			case "desert":
-				playerStats.aP -= 5;
-				break;
-				//playerStats.aP = playerStats.aP - 5;
-			case "frozen":
-				playerStats.hP -= 10;
-				//playerStats.aP = playerStats.hP - 10;
-				break;
+	switch (fieldSelection){
+		case "clear":
+			break;
+		case "rainy":
+			playerStats.aCC -= 1;
+			// playerStats.aCC = playerStats.aCC - 10;
+			break;
+		case "desert":
+			playerStats.aP -= 5;
+			break;
+			//playerStats.aP = playerStats.aP - 5;
+		case "frozen":
+			playerStats.hP -= 10;
+			//playerStats.aP = playerStats.hP - 10;
+			break;
 		}
-		return playerStats;
+			return playerStats;
 }
 function firstAttackRoll(firstPlayer, secondPlayer){
 	let firstPlayerRoll = roll(1, 12);
@@ -123,9 +123,29 @@ function firstAttackRoll(firstPlayer, secondPlayer){
 				return firstAttackRoll(firstPlayer,secondPlayer);
 			}
 		}
-
-
-
+function selectAttack(attacker){
+	let selectedAttack = prompt("Enter attack type: Measured, Heavy or Regular");
+	return selectedAttack
+}		
+function attackTypeAdjust(attacker, attack){
+	switch (attack){
+		case "Measured":
+			attacker.aCC += 5;
+			attacker.aP -= -12;
+			break;
+		case "Heavy": 
+			attacker.aP += 6;
+			attacker.aCC -= 2;
+			break;
+		case "Regular":
+			break;
+	}
+		return attacker;
+}
+function attack(oneAttacker, twoAttacker){
+	attackStats = attackTypeAdjust(firstAttacker, selectedAttack);
+	console.log(attackStats)
+}
 
 
 
