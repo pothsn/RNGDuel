@@ -26,6 +26,9 @@ function runRNGDuel (){
 	playerTwoStats = battlefieldAdjustment(playerTwoStats, selectedField);
 	console.log("Player One attack: " + (playerOneStats.aP), "Player One health: " + (playerOneStats.hP), "Player One accuracy: " + (playerOneStats.aCC));
 	console.log("Player Two attack: " + (playerTwoStats.aP), "Player Two health: " + (playerTwoStats.hP), "Player Two accuracy: " + (playerTwoStats.aCC));
+	let firstAttacker = attackRoll(playerOne, playerTwo);
+	console.log(firstAttacker);
+
 
 }
 
@@ -69,8 +72,8 @@ function battlefield(){
 			return "frozen";
 	}
 }
-function battlefieldAdjustment(playerStats, selectedField){
-		switch (selectedField){
+function battlefieldAdjustment(playerStats, fieldSelection){
+		switch (fieldSelection){
 			case "clear":
 				break;
 			case "rainy":
@@ -88,10 +91,20 @@ function battlefieldAdjustment(playerStats, selectedField){
 		}
 		return playerStats;
 }
-function attackRoll(){
-	roll(1,10);
-}
-
+function attackRoll(firstPlayer, secondPlayer){
+	let firstPlayerRoll = roll(1, 12);
+	let secondPlayerRoll = roll(1, 12);
+		if(firstPlayerRoll > secondPlayerRoll){
+			return firstPlayer;
+			}
+			if(firstPlayerRoll < secondPlayerRoll){
+				return secondPlayer;
+			}
+			else{
+				attackRoll(firstPlayer,secondPlayer);
+				return;
+			}
+		}
 
 
 
