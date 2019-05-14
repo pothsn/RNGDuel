@@ -1,30 +1,26 @@
 runRNGDuel();
 function runRNGDuel (){
-	// alert("Welcome to RNG Duel!");
+	console.log("Welcome to RNG Duel!");
 	let playerOne = "Player One";
 	let playerTwo = "Player Two";
 	let playerOneAttack = rollAttack(playerOne);
-	console.log("Player One attack: " + playerOneAttack);
 	let playerOneHealth = rollHealth(playerOne);
-	console.log("Player One health: " + playerOneHealth);
 	let playerOneAccuracy = rollAccuracy(playerOne);
-	console.log("Player One accuracy: " + playerOneAccuracy);
 	let playerOneStats = {
 		aP: (playerOneAttack),
 		hP: (playerOneHealth),
 		aCC: (playerOneAccuracy)
 	}
+	console.log("Player One attack: " + (playerOneStats.aP), "Player One health: " + (playerOneStats.hP), "Player One accuracy: " + (playerOneStats.aCC));
 	let playerTwoAttack = rollAttack(playerTwo);
-	console.log("Player Two attack: " + playerTwoAttack);
 	let playerTwoHealth = rollHealth(playerTwo);
-	console.log("Player Two health: " + playerTwoHealth);
 	let playerTwoAccuracy = rollAccuracy(playerTwo);
-	console.log("Player Two accuracy: " + playerTwoAccuracy);
 	let playerTwoStats = {
 		aP: (playerTwoAttack),
 		hP: (playerTwoHealth),
 		aCC: (playerTwoAccuracy)
 	}
+	console.log("Player Two attack: " + (playerTwoStats.aP), "Player Two health: " + (playerTwoStats.hP), "Player Two accuracy: " + (playerTwoStats.aCC));
 	let selectedField = battlefield();
 	playerOneStats = battlefieldAdjustment(playerOneStats, selectedField);
 	playerTwoStats = battlefieldAdjustment(playerTwoStats, selectedField);
@@ -72,7 +68,6 @@ function battlefield(){
 			console.log("The field is a frozen wasteland, health has been reduced.");
 			return "frozen";
 	}
-
 }
 function battlefieldAdjustment(playerStats, selectedField){
 		switch (selectedField){
@@ -92,7 +87,6 @@ function battlefieldAdjustment(playerStats, selectedField){
 				break;
 		}
 		return playerStats;
-
 }
 function attackRoll(){
 	roll(1,10);
