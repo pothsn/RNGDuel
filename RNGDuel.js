@@ -11,11 +11,10 @@ function runRNGDuel (){
 	let playerOneAccuracy = rollAccuracy(playerOne);
 	console.log("Player One accuracy: " + playerOneAccuracy);
 	let playerOneStats = {
-		aP: "playerOneAttack",
-		hP: "playerOneHealth",
-		aCC: "playerOneAccuracy"
+		aP: (playerOneAttack),
+		hP: (playerOneHealth),
+		aCC: (playerOneAccuracy)
 	}
-	// alert("Roll stats for Player Two.");
 	let playerTwoAttack = rollAttack(playerTwo);
 	console.log("Player Two attack: " + playerTwoAttack);
 	let playerTwoHealth = rollHealth(playerTwo);
@@ -23,12 +22,12 @@ function runRNGDuel (){
 	let playerTwoAccuracy = rollAccuracy(playerTwo);
 	console.log("Player Two accuracy: " + playerTwoAccuracy);
 	let playerTwoStats = {
-		aP: "playerTwoAttack",
-		hP: "playerTwoHealth",
-		aCC: "playerTwoAccuracy"
+		aP: (playerTwoAttack),
+		hP: (playerTwoHealth),
+		aCC: (playerTwoAccuracy)
 	}
-	alert("Roll for map selection.");
 	let selectedField = battlefield();
+	let fieldStats = battlefieldAdjustment(playerOneStats, playerTwoStats);
 
 
 }
@@ -71,7 +70,7 @@ function battlefield(){
 	}
 
 }
-function battlefieldAdjustment(){
+function battlefieldAdjustment(player){
 
 }
 function attackRoll(){
