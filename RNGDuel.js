@@ -3,7 +3,6 @@ function runRNGDuel (){
 	alert("Welcome to RNG Duel!");
 	let playerOne = "Player One";
 	let playerTwo = "Player Two";
-	// alert("Roll stats for Player One.");
 	let playerOneAttack = rollAttack(playerOne);
 	console.log("Player One attack: " + playerOneAttack);
 	let playerOneHealth = rollHealth(playerOne);
@@ -27,10 +26,15 @@ function runRNGDuel (){
 		aCC: (playerTwoAccuracy)
 	}
 	let selectedField = battlefield();
-	let fieldStats = battlefieldAdjustment(playerOneStats, playerTwoStats);
-
+	playerOneStats = battlefieldAdjustment(playerOneStats, selectedField);
+	playerTwoStats = battlefieldAdjustment(playerTwoStats, selectedField);
+	console.log("Player One attack: " + (playerOneStats.aP), "Player One health: " + (playerOneStats.hP), "Player One accuracy: " + (playerOneStats.aCC));
+	console.log("Player Two attack: " + (playerTwoStats.aP), "Player Two health: " + (playerTwoStats.hP), "Player Two accuracy: " + (playerTwoStats.aCC));
 
 }
+
+
+
 function roll(min, max){
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -70,7 +74,22 @@ function battlefield(){
 	}
 
 }
-function battlefieldAdjustment(player){
+function battlefieldAdjustment(playerStats, selectedField){
+		switch (selectedField){
+			case "clear":
+				break;
+			case "rainy":
+				playerStats.aCC -= 1;
+				// playerStats.aCC = playerStats.aCC - 10;
+				break;
+			case "desert":
+				playerStats.aP -= 5;
+				//playerStats.aP = playerStats.aP - 5;
+			case "frozen":
+				playerStats.hP -= 10;
+				//playerStats.aP = playerStats.aP - 10;
+		}
+		return playerStats;
 
 }
 function attackRoll(){
