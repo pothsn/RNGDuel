@@ -1,6 +1,6 @@
-runRNGDuel();
-function runRNGDuel (){
-	console.log("Welcome to RNG Duel!");
+// runRNGDuel();
+function runRNGDuel(){
+		console.log("Welcome to RNG Duel!");
 	let playerOneAttack = rollAttack();
 	let playerOneHealth = rollHealth();
 	let playerOneAccuracy = rollAccuracy();
