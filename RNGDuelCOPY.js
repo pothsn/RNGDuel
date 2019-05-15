@@ -1,23 +1,22 @@
-// runRNGDuel();
 function runRNGDuel(){
 	console.log("Welcome to RNG Duel!");
 	let playerOneAttack = rollAttack();
 	let playerOneHealth = rollHealth();
 	let playerOneAccuracy = rollAccuracy();
 	let playerOne = {aP: playerOneAttack, hP: playerOneHealth, aCC: playerOneAccuracy, playerNumber: 1, name: "Player One"}
-	console.log("Player One Attack: " + (playerOne.aP),"Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
+	console.log("%cPlayer One Attack: " + (playerOne.aP) + " Health: " + (playerOne.hP) + " Accuracy: " + (playerOne.aCC), "color: red");
 
 	let playerTwoAttack = rollAttack();
 	let playerTwoHealth = rollHealth();
 	let playerTwoAccuracy = rollAccuracy();
 	let playerTwo = {aP: playerTwoAttack, hP: playerTwoHealth, aCC: playerTwoAccuracy, playerNumber: 2, name: "Player Two"}
-	console.log("Player Two Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
+	console.log("%cPlayer Two Attack: " + (playerTwo.aP) + " Health: " + (playerTwo.hP) + " Accuracy: " + (playerTwo.aCC), "color: red");
 	
 	let selectedField = battlefield();
 	playerOne = battlefieldAdjustment(playerOne, selectedField);
 	playerTwo = battlefieldAdjustment(playerTwo, selectedField);
-	console.log("Player One Attack: " + (playerOne.aP), "Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
-	console.log("Player Two Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
+	console.log("%cPlayer One Attack: " + (playerOne.aP) + " Health: " + (playerOne.hP) + " Accuracy: " + (playerOne.aCC), "color: red");
+	console.log("%cPlayer Two Attack: " + (playerTwo.aP) + " Health: " + (playerTwo.hP) + " Accuracy: " + (playerTwo.aCC), "color: red");
 	
 	let firstAttacker = firstAttackRoll(playerOne, playerTwo);
 	console.log(firstAttacker.name + " will attack first.");
@@ -133,7 +132,7 @@ function doPlayerAttack(attacker, defender){
 	let attack = selectAttack(attacker);
 	attackTypeAdjust(attacker, attack);
 	console.log(attacker.name + " selected " + attack);
-	console.log("Attack will have " + attacker.aP + " attack power and ", attacker.aCC + " accuracy.")
+	console.log("%cAttack will have " + attacker.aP + " attack power and " + attacker.aCC + (" accuracy."), "color: red")
 	
 	let isSuccessfulAttack = attackSuccess(attacker);
 	if(isSuccessfulAttack){
@@ -142,24 +141,27 @@ function doPlayerAttack(attacker, defender){
 }
 function selectAttack(attacker){
 	let selectedAttack = prompt(attacker.name + " , enter attack type: Measured, Heavy or Regular");
-		let result = selectedAttack.toUpperCase();	
+		let result = selectedAttack.toLowerCase();	
 			return result
 }
 function attackTypeAdjust(attacker, attack){
 	switch (attack){
-		case "MEASURED":
+		case "measured":
 			attacker.aCC += 5;
 			attacker.aP -= 12;
 			break;
-		case "HEAVY": 
+		case "heavy": 
 			attacker.aP += 6;
 			attacker.aCC -= 2;
 			break;
-		case "REGULAR":
+		case "regular":
 			break;
+		default:
+			console.log("You can't spell so you get to use regular attack. 🙃");
+			break
 	}
 		return attacker;
-	}
+}
 function attackSuccess(attacker){
 	let hitRoll = roll(1, 10);
 	if(hitRoll <= attacker.aCC){
@@ -172,9 +174,9 @@ function attackSuccess(attacker){
 	}
 }		
 function damageTaken(attacker, defender){
-	console.log(defender.name + " hit for " + attacker.aP + " damage.");
+	console.log("%c" + defender.name + " hit for " + attacker.aP + " damage.", "color: red");
 	defender.hP -= attacker.aP;
-	console.log(defender.name + " has " + defender.hP + " health remaining." + " (Attack: " + defender.aP + " Accuracy: " + defender.aCC + ")");
+	console.log("%c" + defender.name + " has " + defender.hP + " health remaining." + " (Attack: " + defender.aP + " Accuracy: " + defender.aCC + ")", "color: red");
 }
 function resetApAcc(attacker, attackReset, accuracyReset){
 	attacker.aP = attackReset;
