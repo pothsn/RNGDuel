@@ -50,6 +50,11 @@ function runRNGDuel (){
 	let winningPlayer = attackLoop(firstAttacker, secondAttacker, firstAttackerOGAttack, firstAttackerOGAccuracy, secondAttackerOGAttack, secondAttackerOGAccuracy);	
 	console.log(winningPlayer.name + " has won the match!")
 }
+
+
+
+
+
 function roll(min, max){
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -117,21 +122,38 @@ function firstAttackRoll(firstPlayer, secondPlayer){
 				return firstAttackRoll(firstPlayer,secondPlayer);
 			}
 		}
-function attackSuccess(attacker){
-	let hitRoll = roll(1, 10);
-	if(hitRoll <= attacker.aCC){
-		console.log("The attack hit!");
-		return true;
+function attackLoop(firstAttacker, secondAttacker, firstAttackerApReset, firstAttackerAccReset, secondAttackerApRest, secondAttackerAccReset) {
+	while (firstAttacker.hP > 0 && secondAttacker.hP > 0) {
+		console.log("Attack round start!");
+		doPlayerAttack(firstAttacker, secondAttacker);
+		resetApAcc(firstAttacker, firstAttackerApReset, firstAttackerAccReset);
+		if (secondAttacker.hP > 0){
+			doPlayerAttack(secondAttacker, firstAttacker);
+			resetApAcc(secondAttacker, secondAttackerApRest, secondAttackerAccReset);
+		}
 	}
-	else{
-		console.log("The attack missed!");
-		return false;
+	if (firstAttacker.hP > 0){
+		return firstAttacker
 	}
-}		
+	else {
+		return secondAttacker
+	}
+}
+function doPlayerAttack(attacker, defender){
+	let attack = selectAttack(attacker);
+	attackTypeAdjust(attacker, attack);
+	console.log(attacker.name + " selected " + attack);
+	console.log("Attack will have " + attacker.aP + " attack power and ", attacker.aCC + " accuracy.")
+	
+	let isSuccessfulAttack = attackSuccess(attacker);
+	if(isSuccessfulAttack){
+		damageTaken(attacker, defender);
+	}
+}
 function selectAttack(attacker){
 	let selectedAttack = prompt(attacker.name + " , enter attack type: Measured, Heavy or Regular");
 	return selectedAttack
-}		
+}
 function attackTypeAdjust(attacker, attack){
 	switch (attack){
 		case "Measured":
@@ -147,39 +169,21 @@ function attackTypeAdjust(attacker, attack){
 	}
 		return attacker;
 }
-function doPlayerAttack(attacker, defender){
-	let attack = selectAttack(attacker);
-	attackTypeAdjust(attacker, attack);
-	console.log(attacker.name + " selected " + attack);
-	console.log("Attack will have " + attacker.aP + " attack power and ", attacker.aCC + " accuracy.")
-	
-	let isSuccessfulAttack = attackSuccess(attacker);
-	if(isSuccessfulAttack){
-		damageTaken(attacker, defender);
+function attackSuccess(attacker){
+	let hitRoll = roll(1, 10);
+	if(hitRoll <= attacker.aCC){
+		console.log("The attack hit!");
+		return true;
 	}
-}
+	else{
+		console.log("The attack missed!");
+		return false;
+	}
+}		
 function damageTaken(attacker, defender){
 	console.log(defender.name + " hit for " + attacker.aP + " damage.");
 	defender.hP -= attacker.aP;
 	console.log(defender.name + " has " + defender.hP + " health remaining." + " (Attack: " + defender.aP + " Accuracy: " + defender.aCC + ")");
-}
-function attackLoop(firstAttacker, secondAttacker, firstAttackerApReset, firstAttackerAccReset, secondAttackerApRest, secondAttackerAccReset) {
-	while (firstAttacker.hP > 0 && secondAttacker.hP > 0) {
-		console.log("Attack round start!");
-		doPlayerAttack(firstAttacker, secondAttacker);
-		resetApAcc(firstAttacker, firstAttackerApReset, firstAttackerAccReset);
-		if (secondAttacker.hP > 0){
-			doPlayerAttack(secondAttacker, firstAttacker);
-			resetApAcc(secondAttacker, secondAttackerApRest, secondAttackerAccReset);
-		}
-	}
-
-	if (firstAttacker.hP > 0){
-		return firstAttacker
-	}
-	else {
-		return secondAttacker
-	}
 }
 function resetApAcc(attacker, attackReset, accuracyReset){
 	attacker.aP = attackReset;
