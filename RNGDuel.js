@@ -152,23 +152,24 @@ function doPlayerAttack(attacker, defender){
 }
 function selectAttack(attacker){
 	let selectedAttack = prompt(attacker.name + " , enter attack type: Measured, Heavy or Regular");
-	return selectedAttack
+		let result = selectedAttack.toUpperCase();	
+			return result
 }
 function attackTypeAdjust(attacker, attack){
 	switch (attack){
-		case "Measured":
+		case "MEASURED":
 			attacker.aCC += 5;
 			attacker.aP -= 12;
 			break;
-		case "Heavy": 
+		case "HEAVY": 
 			attacker.aP += 6;
 			attacker.aCC -= 2;
 			break;
-		case "Regular":
+		case "REGULAR":
 			break;
 	}
 		return attacker;
-}
+	}
 function attackSuccess(attacker){
 	let hitRoll = roll(1, 10);
 	if(hitRoll <= attacker.aCC){
