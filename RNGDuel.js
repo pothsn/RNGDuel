@@ -1,27 +1,23 @@
 // runRNGDuel();
 function runRNGDuel(){
-		console.log("Welcome to RNG Duel!");
+	console.log("Welcome to RNG Duel!");
 	let playerOneAttack = rollAttack();
 	let playerOneHealth = rollHealth();
 	let playerOneAccuracy = rollAccuracy();
-	let playerOne = {
-		aP: playerOneAttack, hP: playerOneHealth, aCC: playerOneAccuracy, playerNumber: 1, name: "Player One"
-	}
-	console.log("Player One attack: " + (playerOne.aP),"Player One health: " + (playerOne.hP), "Player One accuracy: " + (playerOne.aCC));
+	let playerOne = {aP: playerOneAttack, hP: playerOneHealth, aCC: playerOneAccuracy, playerNumber: 1, name: "Player One"}
+	console.log("Player One Attack: " + (playerOne.aP),"Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
 
 	let playerTwoAttack = rollAttack();
 	let playerTwoHealth = rollHealth();
 	let playerTwoAccuracy = rollAccuracy();
-	let playerTwo = {
-		aP: playerTwoAttack, hP: playerTwoHealth, aCC: playerTwoAccuracy, playerNumber: 2, name: "Player Two"
-	}
-	console.log("Player Two attack: " + (playerTwo.aP), "Player Two health: " + (playerTwo.hP), "Player Two accuracy: " + (playerTwo.aCC));
+	let playerTwo = {aP: playerTwoAttack, hP: playerTwoHealth, aCC: playerTwoAccuracy, playerNumber: 2, name: "Player Two"}
+	console.log("Player Two Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
 	
 	let selectedField = battlefield();
 	playerOne = battlefieldAdjustment(playerOne, selectedField);
 	playerTwo = battlefieldAdjustment(playerTwo, selectedField);
-	console.log("Player One Stats are Attack: " + (playerOne.aP), "Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
-	console.log("Player Two Stats are Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
+	console.log("Player One Attack: " + (playerOne.aP), "Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
+	console.log("Player Two Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
 	
 	let firstAttacker = firstAttackRoll(playerOne, playerTwo);
 	console.log(firstAttacker.name + " will attack first.");
@@ -31,7 +27,6 @@ function runRNGDuel(){
 	let firstAttackerOGAccuracy;
 	let secondAttackerOGAttack;
 	let secondAttackerOGAccuracy;
-
 	if(firstAttacker.playerNumber === 1) {
 		secondAttacker = playerTwo;
 		firstAttackerOGAttack = playerOne.aP;
@@ -50,11 +45,6 @@ function runRNGDuel(){
 	let winningPlayer = attackLoop(firstAttacker, secondAttacker, firstAttackerOGAttack, firstAttackerOGAccuracy, secondAttackerOGAttack, secondAttackerOGAccuracy);	
 	console.log(winningPlayer.name + " has won the match!")
 }
-
-
-
-
-
 function roll(min, max){
 	return Math.floor(Math.random() * (max - min) ) + min;
 }
@@ -190,23 +180,3 @@ function resetApAcc(attacker, attackReset, accuracyReset){
 	attacker.aP = attackReset;
 	attacker.aCC = accuracyReset;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
