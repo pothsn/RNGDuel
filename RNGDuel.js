@@ -27,8 +27,8 @@ function runRNGDuel (){
 	let selectedField = battlefield();
 	playerOne = battlefieldAdjustment(playerOne, selectedField);
 	playerTwo = battlefieldAdjustment(playerTwo, selectedField);
-	console.log("Player One attack: " + (playerOne.aP), "Player One health: " + (playerOne.hP), "Player One accuracy: " + (playerOne.aCC));
-	console.log("Player Two attack: " + (playerTwo.aP), "Player Two health: " + (playerTwo.hP), "Player Two accuracy: " + (playerTwo.aCC));
+	console.log("Player One Stats are Attack: " + (playerOne.aP), "Health: " + (playerOne.hP), "Accuracy: " + (playerOne.aCC));
+	console.log("Player Two Stats are Attack: " + (playerTwo.aP), "Health: " + (playerTwo.hP), "Accuracy: " + (playerTwo.aCC));
 	
 	let firstAttacker = firstAttackRoll(playerOne, playerTwo);
 	console.log(firstAttacker.name + " will attack first.");
@@ -171,7 +171,7 @@ function doPlayerAttack(attacker, defender){
 function damageTaken(attacker, defender){
 	console.log(defender.name + " hit for " + attacker.aP + " damage.");
 	defender.hP -= attacker.aP;
-	console.log(defender.name + " has " + defender.hP + " health remaining.");
+	console.log(defender.name + " has " + defender.hP + " health remaining." + " (Attack: " + defender.aP + " Accuracy: " + defender.aCC + ")");
 }
 function attackLoop(firstAttacker, secondAttacker, firstAttackerApReset, firstAttackerAccReset, secondAttackerApRest, secondAttackerAccReset) {
 	while (firstAttacker.hP > 0 && secondAttacker.hP > 0){
